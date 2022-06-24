@@ -3,7 +3,9 @@
 'use strict';
 
 // Set up an empty cart for use on this page.
-const cart = new Cart([]);
+let cart;
+const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+cart = new Cart(cartItems);
 
 // On screen load, we call this method to put all of the product options
 // (the things in the Product.allProducts array) into the drop down list.
@@ -43,10 +45,28 @@ function addSelectedItemToCart() {
   // TODO DONE: suss out the item picked from the select list
   // TODO DONE: get the quantity
   let itemName = selectBox.options[selectBox.selectedIndex].text;
-  let itemCount = document.querySelector('label > input').value;
+  let itemCount = parseInt(document.querySelector('label > input').value);
+
+  console.log(typeof itemName);
+  let state = true;
   
+  for(let i = 0; i < cart.items.length; i++){
+    if(itemName === cart.items[i].product){
+      console.log(cart.items[i].quantity);
+      console.log(itemCount);
+      cart.items[i].quantity += itemCount;
+      console.log(cart.items[i].quantity);
+      state = false;
+      console.log(cart.items);
+      break;
+    }
+  }
+
+  if(state){
+    cart.addItem(itemName, itemCount);
+  }
+
   // TODO DONE: using those, add one item to the Cart
-  cart.addItem(itemName, itemCount);
 }
 
 // TODO DONE: Update the cart count in the header nav with the number of items in the Cart
@@ -62,12 +82,13 @@ function updateCartPreview() {
   let quantity = cart.items[cart.items.length-1].quantity;
   let product = cart.items[cart.items.length-1].product;
   // TODO DONE: Add a new element to the cartContents div with that information
-  let cartPreview = document.getElementById('cartContents');
-  let list = document.createElement('ul');
-  cartPreview.appendChild(list);
-  let listEl = document.createElement('li');
-  list.appendChild(listEl);
-  listEl.textContent = "Added " + quantity + " of "+ product;
+    let cartPreview = document.getElementById('cartContents');
+    let list = document.createElement('ul');
+    cartPreview.appendChild(list);
+    let listEl = document.createElement('li');
+    list.appendChild(listEl);
+    listEl.textContent = "Added " + quantity + " of "+ product;
+
 }
 
 // Set up the "submit" event listener on the form.
