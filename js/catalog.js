@@ -37,7 +37,6 @@ function handleSubmit(event) {
 
 let selectBox = document.getElementById('items');
 let formElement = document.getElementById('catalog');
-formElement.addEventListener('submit', handleSubmit);
 
 // TODO DONE: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
@@ -46,24 +45,36 @@ function addSelectedItemToCart() {
   let itemName = selectBox.options[selectBox.selectedIndex].text;
   let itemCount = document.querySelector('label > input').value;
   
-  // TODO: using those, add one item to the Cart
+  // TODO DONE: using those, add one item to the Cart
   cart.addItem(itemName, itemCount);
-  console.log(cart);
-  
 }
 
-// TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() { }
+// TODO DONE: Update the cart count in the header nav with the number of items in the Cart
+function updateCounter() { 
+  let span = document.getElementById('itemCount');
+  
+  span.textContent = ": " + cart.items.length;
+}
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
 function updateCartPreview() {
-  // TODO: Get the item and quantity from the form
-  // TODO: Add a new element to the cartContents div with that information
+  // TODO DONE: Get the item and quantity from the form
+  let quantity = cart.items[cart.items.length-1].quantity;
+  let product = cart.items[cart.items.length-1].product;
+  // TODO DONE: Add a new element to the cartContents div with that information
+  let cartPreview = document.getElementById('cartContents');
+  let list = document.createElement('ul');
+  cartPreview.appendChild(list);
+  let listEl = document.createElement('li');
+  list.appendChild(listEl);
+  listEl.textContent = "Added " + quantity + " of "+ product;
 }
 
 // Set up the "submit" event listener on the form.
 // This is the trigger for the app. When a user "submits" the form, it will
 // Call that handleSubmit method above and kick off the whole process
+formElement.addEventListener('submit', handleSubmit);
+
 const catalogForm = document.getElementById('catalog');
 catalogForm.addEventListener('submit', handleSubmit);
 
