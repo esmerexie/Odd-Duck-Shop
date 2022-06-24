@@ -4,8 +4,18 @@
 
 // Set up an empty cart for use on this page.
 let cart;
+let input = document.getElementById('quantity');
+input.setAttribute('required', '');
+let selectBox = document.getElementById('items');
+
 const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-cart = new Cart(cartItems);
+if (cartItems != []){
+  cart = new Cart(cartItems);
+  updateCounter();
+}
+else{
+  cart = new Cart(cartItems);
+}
 
 // On screen load, we call this method to put all of the product options
 // (the things in the Product.allProducts array) into the drop down list.
@@ -37,17 +47,15 @@ function handleSubmit(event) {
 
 }
 
-let selectBox = document.getElementById('items');
 let formElement = document.getElementById('catalog');
 
 // TODO DONE: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
   // TODO DONE: suss out the item picked from the select list
-  // TODO DONE: get the quantity
   let itemName = selectBox.options[selectBox.selectedIndex].text;
+  // TODO DONE: get the quantity
   let itemCount = parseInt(document.querySelector('label > input').value);
 
-  console.log(typeof itemName);
   let state = true;
   
   for(let i = 0; i < cart.items.length; i++){
@@ -63,10 +71,10 @@ function addSelectedItemToCart() {
   }
 
   if(state){
+    // TODO DONE: using those, add one item to the Cart
     cart.addItem(itemName, itemCount);
   }
 
-  // TODO DONE: using those, add one item to the Cart
 }
 
 // TODO DONE: Update the cart count in the header nav with the number of items in the Cart
@@ -102,3 +110,7 @@ catalogForm.addEventListener('submit', handleSubmit);
 // Before anything else of value can happen, we need to fill in the select
 // drop down list in the form.
 populateForm();
+
+function printImages(){
+  
+}

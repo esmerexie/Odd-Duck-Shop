@@ -21,7 +21,7 @@ Cart.prototype.saveToLocalStorage = function() {
 };
 
 Cart.prototype.removeItem = function(item) {
-  // TODO: Fill in this instance method to remove one item from the cart.
+  // TODO DONE: Fill in this instance method to remove one item from the cart.
   for(let i = 0; i < cart.items.length; i++){
     if(cart.items[i].product == item){
       cart.items.splice(i, 1);
