@@ -7,6 +7,7 @@ let cart;
 let input = document.getElementById('quantity');
 input.setAttribute('required', '');
 let selectBox = document.getElementById('items');
+let previousLength;
 
 const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 if (cartItems != []){
@@ -90,13 +91,47 @@ function updateCartPreview() {
   let quantity = cart.items[cart.items.length-1].quantity;
   let product = cart.items[cart.items.length-1].product;
   // TODO DONE: Add a new element to the cartContents div with that information
-    let cartPreview = document.getElementById('cartContents');
-    let list = document.createElement('ul');
-    cartPreview.appendChild(list);
-    let listEl = document.createElement('li');
-    list.appendChild(listEl);
-    listEl.textContent = "Added " + quantity + " of "+ product;
+  let cartPreview = document.getElementById('cartContents');
+  
+  let ulEl = document.querySelector('#cartContents ul');
 
+  let titleOfSummary = document.createElement('h3');
+  cartPreview.appendChild(titleOfSummary);
+  titleOfSummary.textContent = "Preview of Cart:"
+  
+  
+  if(ulEl){
+    if(previousLength < cart.items.length){
+      let listEl = document.createElement('li');
+      ulEl.appendChild(listEl);
+      listEl.setAttribute('id', cart.items[cart.items.length - 1].product)
+    }
+    cartPreview.removeChild(titleOfSummary);
+    for(let i = 0; i < cart.items.length; i++){
+      let listEl = document.getElementById(cart.items[i].product);
+      console.log(listEl);
+      ulEl.removeChild(listEl);
+    }
+    
+    for(let i = 0; i < cart.items.length; i++){
+      let listEl = document.createElement('li');
+      ulEl.appendChild(listEl);
+      listEl.setAttribute('id', cart.items[i].product)
+      listEl.textContent = cart.items[i].product + ": " + cart.items[i].quantity;
+    }
+
+  }
+  else{
+    let ulEl = document.createElement('ul');
+    cartPreview.appendChild(ulEl);
+    for(let i = 0; i < cart.items.length; i++){
+      let listEl = document.createElement('li');
+      ulEl.appendChild(listEl);
+      listEl.textContent =  cart.items[i].product + ": " + cart.items[i].quantity;
+      listEl.setAttribute('id', cart.items[i].product)
+    }
+  }
+  previousLength = cart.items.length;
 }
 
 // Set up the "submit" event listener on the form.
@@ -111,6 +146,4 @@ catalogForm.addEventListener('submit', handleSubmit);
 // drop down list in the form.
 populateForm();
 
-function printImages(){
-  
-}
+updateCartPreview();
