@@ -1,1 +1,86 @@
-/* TODO: Make it awesome */
+/* TODO DONE: Make it awesome */
+html {
+  background-color:rgb(231, 194, 107);
+}
+
+.delete {
+  margin-right: 10px;
+  border: none;
+}
+
+.delete:hover {
+  background-color: rgb(240, 67, 67);
+}
+
+table {
+  border: line black;
+  text-align: center;
+}
+
+tbody > tr {
+  padding: 10px 0px;
+  line-height: 1.5;
+}
+
+tbody > tr:hover {
+  background-color: lightgrey;
+}
+
+thead > tr {
+  padding: 10px 0px;
+  line-height: 1.5;
+}
+
+th {
+  padding: 0px 5px;
+  font-weight: bold;
+}
+
+body > header {
+  background-color: rgb(248, 170, 80);
+  padding: 20px 10px;
+}
+
+h1 {
+  font-size: 40px;
+  text-align: center;
+  font-family: 'Times New Roman', Times, serif;
+  color: rgb(0, 0, 0);
+  padding: 10px 0px;
+}
+
+div > header {
+  background-color: rgb(58, 203, 65);
+}
+
+div h1 {
+  font-size: 25px;
+  color: black;
+  font-family: 'Times New Roman', Times, serif
+}
+
+main {
+  margin: 0px 10% auto;
+}
+
+header ul {
+  color: black;
+  display: flex;
+}
+
+li{
+  border: thick line black;
+}
+
+header a {
+  margin: 10px;
+}
+
+fieldset {
+  margin: 10px;
+}
+
+footer {
+  margin: 100% 10% auto;
+  text-align: center;
+}

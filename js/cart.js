@@ -43,10 +43,11 @@ function showCart() {
     // TODO DONE: Create a TD for the delete link, quantity,  and the item
     let tdButton = document.createElement('td');
     let button = document.createElement('button');
-    button.textContent = "Delete";
+    button.textContent = "X";
     row.appendChild(tdButton);
     tdButton.appendChild(button);
     button.setAttribute('id', cart.items[i].product);
+    button.setAttribute('class', 'delete');
     let tdQuant = document.createElement('td');
     tdQuant.textContent = cart.items[i].quantity;
     row.appendChild(tdQuant);
